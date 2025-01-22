@@ -33,12 +33,37 @@ def upfunc(mainlist):
                         mainlist[k+1][i]=0
     for i in mainlist:
         print(i)
-"""
+
 def downfunc(mainlist):
     for i in range(4):
         for j in range(2, -1, -1):
             if mainlist[j][i]:
                 for k in range(j+1, 4):
-                    if mainlist[k][i]==0 or mainlist[k][i]==mainlis
-"""
+                    if mainlist[k][i]==0 or mainlist[k][i]==mainlist[k-1][i]:
+                        mainlist[k][i]+=mainlist[k-1][i]
+                        mainlist[k-1][i]=0
+    for i in mainlist:
+        print(i)
+
+def leftfunc(mainlist):
+    for j in range(4):
+        for i in range(1, 4):
+            #mainlist[j][i]
+            for k in range(i-1, -1, -1):
+                if mainlist[j][k]==0 or mainlist[j][k+1]==mainlist[j][k]:
+                    mainlist[j][k]+=mainlist[j][k+1]
+                    mainlist[j][k+1]=0
+    for i in mainlist:
+        print(i)
+
+def rightfunc(mainlist):
+    for j in range(4):
+        for i in range(2, -1, -1):
+            for k in range(i+1, 4):
+                if mainlist[j][k]==0 or mainlist[j][k-1]:
+                    mainlist[j][k]+=mainlist[j][k-1]
+                    mainlist[j][k-1]=0
+    for i in mainlist:
+        print(i)
+
 main()
