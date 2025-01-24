@@ -5,6 +5,10 @@ def main():
         upfunc(mainlist)
     elif direction=="down":
         downfunc(mainlist)
+    elif direction=="left":
+        leftfunc(mainlist)
+    elif direction=="right":
+        rightfunc(mainlist)
 
 import random
 def start():
@@ -60,7 +64,7 @@ def rightfunc(mainlist):
     for j in range(4):
         for i in range(2, -1, -1):
             for k in range(i+1, 4):
-                if mainlist[j][k]==0 or mainlist[j][k-1]:
+                if mainlist[j][k]==0 or mainlist[j][k-1]==mainlist[j][k]:
                     mainlist[j][k]+=mainlist[j][k-1]
                     mainlist[j][k-1]=0
     for i in mainlist:
