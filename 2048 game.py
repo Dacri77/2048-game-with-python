@@ -1,15 +1,22 @@
 def main():
     mainlist=start()
-    direction=input("Enter up, down, left, right!")
-    if direction=="up":
-        upfunc(mainlist)
-    elif direction=="down":
-        downfunc(mainlist)
-    elif direction=="left":
-        leftfunc(mainlist)
-    elif direction=="right":
-        rightfunc(mainlist)
-
+    temp=True
+    while temp:
+        for i in mainlist:
+            print(i)
+        direction=input("Enter up, down, left, right!")
+        if direction=="up":
+            upfunc(mainlist)
+        elif direction=="down":
+            downfunc(mainlist)
+        elif direction=="left":
+            leftfunc(mainlist)
+        elif direction=="right":
+            rightfunc(mainlist)
+        temp=zero(mainlist)
+        if temp:
+            plustwo(mainlist)
+    print("GAME OVER!")
 import random
 def start():
     startlist=[[0 for i in range(4)]for j in range(4)]
@@ -23,8 +30,6 @@ def start():
     startlist[e1i1][e1i2]=2
     startlist[e2i1][e2i2]=2
     print("The game has been started!")
-    for i in startlist:
-        print(i)
     return startlist
 
 def upfunc(mainlist):
@@ -35,19 +40,15 @@ def upfunc(mainlist):
                     if mainlist[k][i]==0 or mainlist[k][i]==mainlist[k+1][i]:
                         mainlist[k][i]+=mainlist[k+1][i]
                         mainlist[k+1][i]=0
-    for i in mainlist:
-        print(i)
 
 def downfunc(mainlist):
     for i in range(4):
         for j in range(2, -1, -1):
-            if mainlist[j][i]:
+            if mainlist[j][i]!=0:
                 for k in range(j+1, 4):
                     if mainlist[k][i]==0 or mainlist[k][i]==mainlist[k-1][i]:
                         mainlist[k][i]+=mainlist[k-1][i]
                         mainlist[k-1][i]=0
-    for i in mainlist:
-        print(i)
 
 def leftfunc(mainlist):
     for j in range(4):
@@ -57,8 +58,6 @@ def leftfunc(mainlist):
                 if mainlist[j][k]==0 or mainlist[j][k+1]==mainlist[j][k]:
                     mainlist[j][k]+=mainlist[j][k+1]
                     mainlist[j][k+1]=0
-    for i in mainlist:
-        print(i)
 
 def rightfunc(mainlist):
     for j in range(4):
@@ -67,7 +66,28 @@ def rightfunc(mainlist):
                 if mainlist[j][k]==0 or mainlist[j][k-1]==mainlist[j][k]:
                     mainlist[j][k]+=mainlist[j][k-1]
                     mainlist[j][k-1]=0
-    for i in mainlist:
-        print(i)
 
+def zero(mainlist):
+    for i in range(4):
+        for j in range(4):
+            if mainlist[j][i]==0:
+                return True
+    return False
+
+def plustwo(mainlist):
+    count=0
+    for i in range(len(mainlist)):
+        for j in range(len(mainlist[i])):
+            if mainlist[i][j]==0:
+                count+=1
+    import random
+    temp=random.randint(1, count)
+    count=0
+    for i in range(len(mainlist)):
+        for j in range(len(mainlist)):
+            if mainlist[i][j]==0:
+                count+=1
+                if count==temp:
+                    mainlist[i][j]=2
+    
 main()
